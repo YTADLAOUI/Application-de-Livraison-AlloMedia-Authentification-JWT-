@@ -4,11 +4,7 @@ require("dotenv").config();
 const DATABASE_URL  = process.env.DATABASE_URL 
 class ConnectionDb{
 static connectDatabase() {
-   mongoose.connect(DATABASE_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
+   mongoose.connect(DATABASE_URL);
   const  db =  mongoose.connection;
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
   db.once('open', () => {
