@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev:server": "nodemon ."
+    "dev:server": "nodemon .",
+    "role:seed":"node ./src/models/seeders/roleSeeder.js"
   },
   "author": "",
   "license": "ISC",
