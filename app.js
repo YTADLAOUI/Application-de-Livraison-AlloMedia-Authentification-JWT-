@@ -1,12 +1,15 @@
 const express = require('express');
-const dotenv=require("dotenv");
- const bodyParser=require("body-parser");
+require("dotenv").config();
+const bodyParser=require("body-parser");
 const ConnectionDb = require('./src/database/db');
 const { Rout } = require('./src/routes/auth');
 const app=express();
-dotenv.config();
+
+
+
  app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
+
 
 const PORT=process.env.SERVER_PORT || 3000;
 
@@ -15,9 +18,5 @@ ConnectionDb.connectDatabase();
 app.listen(PORT,()=>{
   console.log(`server run in PORT ${PORT}...`)
 })
-
-
-
-
 
 

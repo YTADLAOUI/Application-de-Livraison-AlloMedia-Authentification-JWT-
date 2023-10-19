@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
-require("dotenv").config();
 
 const DATABASE_URL  = process.env.DATABASE_URL 
 class ConnectionDb{
 static connectDatabase() {
    mongoose.connect(DATABASE_URL, {
      dbName: "alloMedia",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
   });
 
   const  db =  mongoose.connection;

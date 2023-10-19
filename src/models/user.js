@@ -34,6 +34,10 @@ const userSchema = new schema({
     type: mongoose.Schema.Types.ObjectId,
     ref:'roleModel'
   },
+  isEmailVerfied:{
+    type:Boolean,
+    require:true
+  },
   isVerified:{
     type : Boolean,
     require:true
