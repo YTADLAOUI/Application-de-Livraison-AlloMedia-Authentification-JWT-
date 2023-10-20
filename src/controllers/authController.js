@@ -71,23 +71,44 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
       if(!email.trim() || !password.trim()){
         res.json({message:"s'il vous plait remplait touts les champs"})
       }
-        const user= await userModel.findOne(email);
+        const user= await userModel.findOne(email).populate('role');
         if(user &&(await bcrypt.compare(password , userModel.password))){
-         
-            if(user.isEmailVerfied){
-            return  res.json({message:"your account verfiée"})
-            }else{
-              res.json({message: "check your email"})
-            }
+          if(user.isEmailVerified){
+            const loginToken = Config.generateToken( user , '48h');
+            res.cookie('token', loginToken, { httpOnly: true, secure: true });
+            res.status(201).json({
+                message: `hello ${ user.name }, you are logged in as a ${user.role.name}`,
+            });
+        }else{
+          const Token = Config.generateToken(user , '10m');  
+          const linkSend = `${process.env.BASE_URL}/api/auth/verify/${Token}`
+          await Config.sendEmail(email,"Verificaiton",linkSend);
+            res.json({ message : "please check your email "})
+        }    
         }else {
-          res.json({message: "informaiton "})
+          res.json({message: "informaiton incorrecte please check it"})
         }
-
     }catch(erreur){
       console.log(erreur);
     }
-
   }
+      static async forgetPassword(req,res){
+      try{
+        const {email}=req.body
+        if(!email.trim()) return res.json({message:"rempli le champs"})
+        const user = await userModel.findOne(email ).populate('role');
+        if (!user) return res.status(400).json({ error: 'Email is not found' });
+        const Token = Config.generateToken(user , '10m');  
+        const linkSend = `${process.env.BASE_URL}/api/auth/forgetPassword/${Token}`
+        await Config.sendEmail(email,"forgetPassword",linkSend);
+        res.json({ success: 'Check your email to reset your password!' });
+       }
+      catch(err){
+            
+      }}
+      static async restPassword(){
+
+      }
 }
 
 module.exports=Auth;

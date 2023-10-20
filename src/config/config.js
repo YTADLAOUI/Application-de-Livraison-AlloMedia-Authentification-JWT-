@@ -29,21 +29,23 @@ class Config{
                 pass: process.env.PASS
               }
             });
-            const html = `
+              const html = `
             <!DOCTYPE html>
             <html>
             <head>
-                <title>Email Verification</title>
+                <title>Email ${subject}</title>
             </head>
             <body>
                 <div>
                     <p>Thank you for signing up. Please verify your email address to activate your account:</p>
-                    <p><a href="${link}">Verify your email</a></p>
+                    <p><a href="${link}">Entre ici</a></p>
                   
                 </div>
             </body>
             </html>
           `;
+            
+            
           await transport.sendMail({
             from: "usftadlaoui@gmail.com",
             to: email,
