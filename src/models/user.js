@@ -32,7 +32,7 @@ const userSchema = new schema({
   },
   role:{
     type: mongoose.Schema.Types.ObjectId,
-    ref:'roleModel'
+    ref:'roles'
   },
   isEmailVerfied:{
     type:Boolean,

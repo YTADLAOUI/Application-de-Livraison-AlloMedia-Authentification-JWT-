@@ -37,7 +37,7 @@ class Config{
             </head>
             <body>
                 <div>
-                    <p>Thank you for signing up. Please verify your email address to activate your account:</p>
+                    <p>${subject=="Verificaiton"?"Thank you for signing up. Please verify your email address to activate your account":"click sur link for reset password"}</p>
                     <p><a href="${link}">Entre ici</a></p>
                   
                 </div>

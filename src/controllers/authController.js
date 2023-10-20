@@ -93,10 +93,12 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
     }
   }
       static async forgetPassword(req,res){
+        console.log(req.body)
       try{
-        const {email}=req.body
+        console.log("dfghjkl");
+        const {email}=req.body;
         if(!email.trim()) return res.json({message:"rempli le champs"})
-        const user = await userModel.findOne(email ).populate('role');
+        const user = await userModel.findOne({ email: email }).populate('role');
         if (!user) return res.status(400).json({ error: 'Email is not found' });
         const Token = Config.generateToken(user , '10m');  
         const linkSend = `${process.env.BASE_URL}/api/auth/forgetPassword/${Token}`
@@ -104,7 +106,8 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
         res.json({ success: 'Check your email to reset your password!' });
        }
       catch(err){
-            
+        res.json({message:"oki"})
+        console.error("Error populating 'role':", err);
       }}
       static async restPassword(){
 
