@@ -101,7 +101,7 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
         const user = await userModel.findOne({ email: email }).populate('role');
         if (!user) return res.status(400).json({ error: 'Email is not found' });
         const Token = Config.generateToken(user , '10m');  
-        const linkSend = `${process.env.BASE_URL}/api/auth/forgetPassword/${Token}`
+        const linkSend = `${process.env.BASE_URL}/api/auth/resetPassword/${Token}`
         await Config.sendEmail(email,"forgetPassword",linkSend);
         res.json({ success: 'Check your email to reset your password!' });
        }
@@ -109,9 +109,29 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
         res.json({message:"oki"})
         console.error("Error populating 'role':", err);
       }}
-      static async restPassword(){
-
+      static async restPassword(req,res){
+        try{
+          const token= req.params.token
+            const {password}=req.body;
+          if(!token||!password) return res.json({message:"rempli les champs"})
+            const verify= Config.validateToken(token);
+          if(verify.error) return res.json({message:"token is note work"})
+          console.log(verify.data);
+            const _id=verify.data.user._id
+           const  user= await userModel.findOne({_id})
+            console.log(user)
+            if(!user) return res.json({message:"user not found 404"})
+            const saltRounds=10;
+            const passwordHashed= await bcrypt.hash(password,saltRounds);
+            updateUser= await userModel.updateOne({_id},{password:passwordHashed})
+            return res.json({message:"password update with succss"});
+        }catch(err){
+            res.json({erreur:"password not change"})
+        }
+        
+          
       }
+      
 }
 
 module.exports=Auth;
