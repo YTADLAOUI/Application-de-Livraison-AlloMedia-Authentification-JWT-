@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev:server": "nodemon .",
-    "role:seed": "node ./src/models/seeders/roleSeeder.js"
+    "role:seed": "node ./src/models/seeders/roleSeeder.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "cookie-parser": "^1.4.6",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1"
   }
 }

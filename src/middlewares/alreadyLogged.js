@@ -1,7 +1,6 @@
 const { validateToken } = require("../config/config");
 
-class UserMiddle{
-   
+class UserMiddle{ 
   static alreadyLogged(req,res,next){
          const token =req.cookies.token
          console.log(token)
@@ -10,7 +9,7 @@ class UserMiddle{
            console.log(verify.success);
           if(verify.success) return next()
         }
-        return  res.json({message:"you shold loggin"})
+        return  res.json({message:"you should loggin"})
   }
      static previouslyLogged(req,res,next){
       const token =req.cookies.tok
