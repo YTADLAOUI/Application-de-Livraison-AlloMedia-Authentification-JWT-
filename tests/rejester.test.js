@@ -32,10 +32,9 @@ describe('register', () => {
       phoneNumber: '1234567890',
       address: '123 Main St',
       image: 'avatar.jpg',
-      role: 'user',
+      role: 'client',
     });
     const res = mockResponse();
-
     userModel.findOne.mockResolvedValue(null);
     roleModel.findOne.mockResolvedValue({ _id: 'role_id' });
     bcrypt.hash.mockResolvedValue('hashed_password');
@@ -56,16 +55,16 @@ describe('register', () => {
 
     await register(req, res);
 
-    expect(res.json).toHaveBeenCalledWith({ message: 'check your email' });
-    expect(res.status).not.toHaveBeenCalled();
-    expect(Config.generateToken).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-      }),
-      '10m'
-    );
-    expect(Config.sendEmail).toHaveBeenCalled();
+expect(res.json).toHaveBeenCalledWith({ message: 'check your email' });
+expect(res.status).not.toHaveBeenCalled();
+expect(Config.generateToken).toHaveBeenCalledWith(
+  expect.objectContaining({
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+  }),
+  '10m'
+);
+expect(Config.sendEmail).toHaveBeenCalled();
   });
 
   it('should return an error message when a user with the same email already exists', async () => {
@@ -100,7 +99,7 @@ describe('register', () => {
 
   it('should return an error message when required fields are missing', async () => {
     const req = mockRequest({
-      name: 'yyyy', // Missing name
+      name: '', // Missing name
       email: 'johndoe@example.com',
       password: 'password',
       phoneNumber: '1234567890',
