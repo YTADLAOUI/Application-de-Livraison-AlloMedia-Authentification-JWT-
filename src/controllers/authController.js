@@ -1,7 +1,5 @@
 const { roleModel } = require("../models/role");
 const { userModel } = require("../models/user");
-const{jwt}=require("jsonwebtoken");
-const {cookie}= require("cookies-parser");
 const bcrypt = require('bcrypt'); 
 const Config = require("../config/config");
 
@@ -11,11 +9,10 @@ class Auth{
     try{
         // console.log(req.body,"here")
 const {name, email, password, phoneNumber, address, image, role}=req.body
-
         if(!name.trim()|| !email.trim()|| !password.trim()|| !phoneNumber.trim()|| !address.trim()|| !image.trim()|| !role.trim()){
           return res.json({message:"s'il vous plait remplie tout les champs"})
         }
-
+       
     const role1 = await roleModel.findOne({ name:role  });
           const existUser= await userModel.findOne({email});
           if(existUser){
@@ -32,16 +29,15 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
             image,
             role:role1._id,
             isEmailVerfied:false,
-            isVerified: role === 'livreur' ? false : true, 
+            isVerified: role === 'Livreur' ? false : true, 
             isDeleted: false,
           });
           const saved_user = await newUser.save();
-         
+         console.log(saved_user);
           
           const Token = Config.generateToken(saved_user , '10m');  
            const linkSend = `${process.env.BASE_URL}/api/auth/verify/${Token}`
            await Config.sendEmail(email,"Verificaiton",linkSend);
-         
               return res.json({message:"check your email"})
     }catch(error){
       console.error(error);
@@ -71,14 +67,17 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
       if(!email.trim() || !password.trim()){
         res.json({message:"s'il vous plait remplait touts les champs"})
       }
-        const user= await userModel.findOne(email).populate('role');
-        if(user &&(await bcrypt.compare(password , userModel.password))){
-          if(user.isEmailVerified){
+        const user= await userModel.findOne({email:email}).populate('role');
+        if(user &&(await bcrypt.compare(password, user.password))){
+          if(!user.isEmailVerified){
             const loginToken = Config.generateToken( user , '48h');
-            res.cookie('token', loginToken, { httpOnly: true, secure: true });
+           res.cookie('token', loginToken, { httpOnly: true, secure: true });
+           if(user.isVerified){
             res.status(201).json({
                 message: `hello ${ user.name }, you are logged in as a ${user.role.name}`,
-            });
+            });}else{
+             return res.json("wait admin approve your role")
+            }
         }else{
           const Token = Config.generateToken(user , '10m');  
           const linkSend = `${process.env.BASE_URL}/api/auth/verify/${Token}`
@@ -92,10 +91,16 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
       console.log(erreur);
     }
   }
+
+   static logout(req, res){
+    const token =req.cookies.token
+    console.log(token)
+    res.clearCookie('token');
+    res.json({ success: 'Logged out successfully' });
+}
       static async forgetPassword(req,res){
         console.log(req.body)
       try{
-        console.log("dfghjkl");
         const {email}=req.body;
         if(!email.trim()) return res.json({message:"rempli le champs"})
         const user = await userModel.findOne({ email: email }).populate('role');
@@ -127,11 +132,8 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
             return res.json({message:"password update with succss"});
         }catch(err){
             res.json({erreur:"password not change"})
-        }
-        
-          
+        }    
       }
-      
 }
 
 module.exports=Auth;
