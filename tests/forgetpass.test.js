@@ -1,4 +1,4 @@
-const { forgetPassword } = require("../src/controllers/authController");
+const { forgetPassword } = require("../src/controllers/AuthController");
 const userModel = require('../src/models/user');
 const Config = require('../src/config/config');
 
