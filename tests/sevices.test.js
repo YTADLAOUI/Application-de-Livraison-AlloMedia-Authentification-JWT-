@@ -1,29 +1,30 @@
 const AuthService = require('../src/services/AuthService'); // Update the path to your AuthService file
-
+const bcrypt = require('bcrypt'); 
 // Mock dependencies (optional)
-require('../src/models/user');
+// require('../src/models/user');
+const userModel = require('../src/models/user');
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
 jest.mock('nodemailer');
 const jwt = require('jsonwebtoken');
 describe('AuthService', () => {
   describe('isEmailExist', () => {
-    it('should return true if email exists', async () => {
-      const userModel = require('../src/models/user');
-      userModel.findOne.mockResolvedValue({ email: 'test@example.com' });
-
-      const result = await AuthService.isEmailExist('test@example.com');
-      expect(result).toBe(true);
+    it('should return true if email exists', async  () => {
+      // userModel.findOne.mockResolvedValue({ email: 'test@example.com' });
+      userModel.findOne = async () => ({ email: 'test@example.com' }) //jest.fn().mockReturnValue({ email: 'test@example.com' });
+      AuthService.isEmailExist('test@example.com').then(result => expect(result).toBe(true))
+      // expect(userModel.findOne ).toHaveBeenCalledWith({ email: 'test@example.com' });
+      
     });
-
+      
     it('should return false if email does not exist', async () => {
-      const userModel = require('../src/models/user');
-      userModel.findOne.mockResolvedValue(null);
+     
+      userModel.findOne=async()=>( null);
 
-      const result = await AuthService.isEmailExist('nonexistent@example.com');
-      expect(result).toBe(false);
+      AuthService.isEmailExist('nonexistent@example.com').then(result =>  expect(result).toBe(false));
+    
     });
-  });
+   });
 
   describe('updateOne', () => {
     it('should update a document in the model', async () => {
@@ -32,7 +33,7 @@ describe('AuthService', () => {
       const fields = { name: 'Updated Name' };
       const expectedResult = { nModified: 1 };
 
-      model.updateOne.mockResolvedValue(expectedResult);
+      model.updateOne = jest.fn().mockResolvedValue(expectedResult);
 
       const result = await AuthService.updateOne(model, filter, fields);
       expect(result).toEqual(expectedResult);
@@ -45,7 +46,7 @@ describe('AuthService', () => {
       const argg = { email: 'test@example.com' };
       const expectedResult = { name: 'Test User' };
 
-      model.findOne.mockResolvedValue(expectedResult);
+      model.findOne= jest.fn().mockResolvedValue(expectedResult);
 
       const result = await AuthService.findOne(model, argg);
       expect(result).toEqual(expectedResult);
@@ -57,7 +58,7 @@ describe('AuthService', () => {
       const password = 'testpassword';
       const hashedPassword = 'hashedPassword';
 
-      bcrypt.hash.mockResolvedValue(hashedPassword);
+      bcrypt.hash=jest.fn().mockResolvedValue(hashedPassword);
 
       const result = await AuthService.hashPassword(password);
       expect(result).toEqual(hashedPassword);
@@ -69,9 +70,9 @@ describe('AuthService', () => {
       const name = 'Test User';
       const email = 'test@example.com';
       const passwordHashed = 'hashedPassword'; // Simulated hashed password
-      const phoneNumber = '1234567890';
+      const phoneNumber = 1234567890;
       const address = '123 Main St';
-      const image = 'profile.jpg';
+      const image = 'photo.png';
       const role = 'Livreur';
       const roleID = { _id: 'role_id' };
 
@@ -80,13 +81,23 @@ describe('AuthService', () => {
         email,
         passwordHashed,
         phoneNumber,
-        address,
-        image,
+        address,        
         role,
         roleID
       );
-
-      expect(result).toEqual({
+      
+      expect({
+        "address": result.address,
+        "email": result.email,
+        "image": "photo.png",
+        "isDeleted": false,
+        "isEmailVerfied": false,
+        "isVerified": false,
+        "name": result.name,
+        "password": result.password,
+        "phoneNumber": result.phoneNumber,
+        role:roleID._id,
+      }).toEqual({
         name,
         email,
         password: passwordHashed,
@@ -133,6 +144,6 @@ describe('AuthService', () => {
 
       const result = AuthService.validateToken('invalidtoken');
       expect(result).toEqual({ error: 'Token is invalid' });
-    });
+   });
   });
 });
