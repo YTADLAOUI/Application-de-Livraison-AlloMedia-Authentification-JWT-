@@ -1,7 +1,6 @@
 const { roleModel } = require("../models/role");
 const { userModel } = require("../models/user");
 const bcrypt = require('bcrypt'); 
-const Config = require("../config/config");
 const AuthService = require("../services/AuthService")
 
 
@@ -10,34 +9,38 @@ class AuthController{
     try{
         // console.log(req.body,"here")
 const {name, email, password, phoneNumber, address, image, role}=req.body
-        if(!name.trim()|| !email.trim()|| !password.trim()|| !phoneNumber.trim()|| !address.trim()|| !image.trim()|| !role.trim()){
-          return res.json({message:"s'il vous plait remplie tout les champs"})
+        if(!name.trim()|| !email.trim()|| !password.trim()|| !phoneNumber.trim()|| !address.trim()|| !role.trim()){
+          return res.json({remplie:"s'il vous plait remplie tout les champs"})
         }
        
     const role1 = await roleModel.findOne({ name:role  });
 
           const isEmailExistr= await AuthService.isEmailExist(email);
           if(isEmailExistr){
-               return res.json({ message: 'Cet utilisateur existe déjà.' });
+               return res.json({ utilisateurExiste: 'Cet utilisateur existe déjà.' });
           }
+        //   const phoneNumberPattern = /^\d{10}$/;
 
+        //  if (!phoneNumberPattern.test(phoneNumber)) res.json({erreur:"respect la forme du numero"})
           const passwordHashed= await AuthService.hashPassword(password);
-          const newUser= await AuthService.createUser(name,email,passwordHashed,phoneNumber,address,image,role,role1)
+          const newUser= await AuthService.createUser(name,email,passwordHashed,phoneNumber,address,role,role1)
           const saved_user = await newUser.save();
          console.log(saved_user);
           const Token =  AuthService.generateToken(saved_user , '10m');  
-           const linkSend = `${process.env.BASE_URL}/api/auth/verify/${Token}`
+           const linkSend = `http://localhost:3000/verify/${Token}`
            await AuthService.sendEmail(email,"Verificaiton",linkSend);
-              return res.json({message:"check your email"});
+              return res.json({check:"check your email"});
     }catch(error){
       console.error(error);
-      res.status(500).json({ message: "Une erreur s'est produite lors de l'inscription." });
+      res.status(500).json({ errorRg: "Une erreur s'est produite lors de l'inscription." });
     }
   }
       static async emailVerfied(req,res){
         const token=  req.params.token
+        console.log(token)
               if(!token) return res.json({ error: 'Access expierd' });
              const verfie=  AuthService.validateToken(token);
+             console.log(verfie)
              if(!verfie.success) return res.json({ error: 'Access not valide' });
              console.log(verfie)
         try{
@@ -61,16 +64,19 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
         if(user &&(await bcrypt.compare(password,user.password))){
           if(!user.isEmailVerified){
             const loginToken = AuthService.generateToken( user , '48h');
-           res.cookie('token', loginToken, { httpOnly: true, secure: true });
+           res.cookie('token', loginToken, { httpOnly: true, secure: true,sameSite: 'none' });
            if(user.isVerified){
+            
             res.status(201).json({
                 message: `hello ${ user.name }, you are logged in as a ${user.role.name}`,
+                user,
+                loginToken
             });}else{
              return res.json("wait admin approve your role")
             }
         }else{
           const Token = AuthService.generateToken(user , '10m');  
-          const linkSend = `${process.env.BASE_URL}/api/auth/verify/${Token}`
+          const linkSend = `http://localhost:3000/verify/${Token}`
           await AuthService.sendEmail(email,"Verificaiton",linkSend);
             res.json({ message : "please check your email "})
         }    
@@ -97,7 +103,7 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
         const user = await AuthService.findOne(userModel,{email:email},"role");
         if (!user) return res.status(400).json({ error: 'Email is not found' });
         const Token = AuthService.generateToken(user , '10m');  
-        const linkSend = `${process.env.BASE_URL}/api/auth/resetPassword/${Token}`
+        const linkSend = `http://localhost:3000/resetPassword/${Token}`
         await AuthService.sendEmail(email,"forgetPassword",linkSend);
         res.json({ success: 'Check your email to reset your password!' });
        }
@@ -111,15 +117,17 @@ const {name, email, password, phoneNumber, address, image, role}=req.body
             const {password}=req.body;
           if(!token||!password) return res.json({message:"rempli les champs"})
             const verify= AuthService.validateToken(token);
-          if(verify.error) return res.json({message:"token is note work"})
+          if(verify.error) return res.json({message:"token is note work"});
           console.log(verify.data);
             const _id=verify.data.user._id
            const  user= await AuthService.findOne(userModel,{_id:_id})
-            console.log(user)
-            if(!user) return res.json({message:"user not found 404"})
-            const passwordHashed= await AuthService.hashPassword(password)
-            updateUser= await AuthService.updateOne(userModel,{_id:_id},{password:passwordHashed})
-            return res.json({message:"password update with succss"});
+            console.log(user,"here")
+            if(!user) return res.json({message:"user not found 404"});
+            const passwordHashed= await AuthService.hashPassword(password);
+            console.log(passwordHashed,"pass");
+           const updateUser= await AuthService.updateOne(userModel,{_id:_id},{password: passwordHashed})
+            console.log("heloo")
+             res.json({message:"password update with succss"});
         }catch(err){
             res.json({erreur:"password not change"})
         }    

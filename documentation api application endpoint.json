@@ -1,0 +1,884 @@
+{
+	"info": {
+		"_postman_id": "f7fc1b99-2137-4ba9-a5b4-9b4303b96d50",
+		"name": "Application-de-Livraison-AlloMedia-Authentification-JWT",
+		"description": "This endpoint is used to authenticate a user and obtain an access token.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25854152"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"youssef\",\r\n    \"email\":\"youssef123@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"phoneNumber\":\"1234544\",\r\n    \"role\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				},
+				"description": "This endpoint is used to register a new user."
+			},
+			"response": [
+				{
+					"name": "registerExemple",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"youssef\",\r\n    \"email\":\"youssef123@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"phoneNumber\":\"123452244\",\r\n    \"address\":\"UYTRYHETR45\",\r\n    \"role\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c-KbZHBDtko6vpOTZIwR0LyEwh/O8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 08:20:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"check\": \"check your email\"\n}"
+				},
+				{
+					"name": "register user existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"youssef\",\r\n    \"email\":\"youssef123@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"phoneNumber\":\"1234544\",\r\n    \"address\":\"UYTRYHETR45\",\r\n    \"role\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-bUmHzlmklRrL8IXOIp2mW3QObak\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 09:23:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"utilisateurExiste\": \"Cet utilisateur existe déjà.\"\n}"
+				},
+				{
+					"name": "registerError",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"youssef\",\r\n    \"email\":\"youssef123@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"phoneNumber\":\"1234544\",\r\n    \"role\":\"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e-Qw82CDLeW1g5Xcl3Jvh20ycQLVI\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 10:17:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorRg\": \"Une erreur s'est produite lors de l'inscription.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "reset password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"password\": \"qahuvaz@mailinator.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/resetPassword/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"resetPassword",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE"
+					]
+				},
+				"description": "This endpoint is used to initiate the password reset process for a user"
+			},
+			"response": [
+				{
+					"name": "resetExemple",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"password\": \"qahuvaz@mailinator.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/resetPassword/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"resetPassword",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29-L4KIgJ1+79BpJIcVhac82mhfukE\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 08:18:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"password update with succss\"\n}"
+				},
+				{
+					"name": "exempleValidation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/resetPassword/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"resetPassword",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NjA3LCJleHAiOjE2OTg4MjcyMDd9.gR-vdpxn9YU5hPU-OksLUQSHJnrwtGyawPIxPMDJ7iE"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f-lxmFUaC15qZPV705u6t/hRMn5xs\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 10:52:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"rempli les champs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "forget password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"qahuvaz@mailinator.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/forgetPassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"forgetPassword"
+					]
+				},
+				"description": "This endpoint is used to initiate the process of resetting a forgotten password for a user"
+			},
+			"response": [
+				{
+					"name": "forget password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"qahuvaz@mailinator.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/forgetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"forgetPassword"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "54"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"36-6G4i+QXt/8sJBaWp0omP9Ans4s4\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 08:16:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": \"Check your email to reset your password!\"\n}"
+				},
+				{
+					"name": "forget password validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/forgetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"forgetPassword"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "30"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e-ja/rzGRfVyRV6iWl+F7exe92FfM\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 10:54:07 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"rempli le champs\"\n}"
+				}
+			]
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				},
+				"description": "This endpoint is used to log out the currently authenticated user"
+			},
+			"response": [
+				{
+					"name": "logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "37"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"25-Sn74LfXG+ijOFv3pnlT/8jn7D6s\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 08:16:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": \"Logged out successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"qahuvaz@mailinator.com\",\r\n    \"password\":\"qahuvaz@mailinator.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "This endpoint is used to authenticate a user and obtain an access token."
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"qahuvaz@mailinator.com\",\r\n    \"password\":\"qahuvaz@mailinator.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NTA5LCJleHAiOjE2OTg5OTkzMDl9.bBwOU1oJNKwh0ATHFQLfipeQYw0Yc5iNU4YmV6bXVOQ; Path=/; HttpOnly; Secure; SameSite=None"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1259"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4eb-vShIadiEdywWCqpuVjePo454fe8\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 08:15:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"hello Olga Wheeler, you are logged in as a client\",\n    \"user\": {\n        \"_id\": \"654207e05ea37e15e6fd3fb3\",\n        \"name\": \"Olga Wheeler\",\n        \"email\": \"qahuvaz@mailinator.com\",\n        \"password\": \"$2b$10$eMp01o2bdWAEN7qDp6hhGOa/bY9GkABQciD80LxnRaLfnL4OhVb36\",\n        \"phoneNumber\": 6273615312,\n        \"address\": \"Excepturi dolore mol\",\n        \"image\": \"photo.png\",\n        \"role\": {\n            \"_id\": \"653008665be3c93a0443394b\",\n            \"name\": \"client\"\n        },\n        \"isEmailVerfied\": true,\n        \"isVerified\": true,\n        \"isDeleted\": false,\n        \"createdAt\": \"2023-11-01T08:10:08.591Z\",\n        \"updatedAt\": \"2023-11-01T08:11:04.858Z\",\n        \"__v\": 0\n    },\n    \"loginToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NDIwN2UwNWVhMzdlMTVlNmZkM2ZiMyIsIm5hbWUiOiJPbGdhIFdoZWVsZXIiLCJlbWFpbCI6InFhaHV2YXpAbWFpbGluYXRvci5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlTXAwMW8yYmRXQUVON3FEcDZoaEdPYS9iWTlHa0FCUWNpRDgwTHhuUmFMZm5MNE9oVmIzNiIsInBob25lTnVtYmVyIjo2MjczNjE1MzEyLCJhZGRyZXNzIjoiRXhjZXB0dXJpIGRvbG9yZSBtb2wiLCJpbWFnZSI6InBob3RvLnBuZyIsInJvbGUiOnsiX2lkIjoiNjUzMDA4NjY1YmUzYzkzYTA0NDMzOTRiIiwibmFtZSI6ImNsaWVudCJ9LCJpc0VtYWlsVmVyZmllZCI6dHJ1ZSwiaXNWZXJpZmllZCI6dHJ1ZSwiaXNEZWxldGVkIjpmYWxzZSwiY3JlYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMDowOC41OTFaIiwidXBkYXRlZEF0IjoiMjAyMy0xMS0wMVQwODoxMTowNC44NThaIiwiX192IjowfSwiaWF0IjoxNjk4ODI2NTA5LCJleHAiOjE2OTg5OTkzMDl9.bBwOU1oJNKwh0ATHFQLfipeQYw0Yc5iNU4YmV6bXVOQ\"\n}"
+				},
+				{
+					"name": "login Validation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"qahuvaz@mailinator.com\",\r\n    \"password\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://localhost:3000"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"37-PUQEfLFi5UrRrPc1GduttYkgyRc\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 01 Nov 2023 10:56:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"s'il vous plait remplait touts les champs\"\n}"
+				}
+			]
+		}
+	]
+}

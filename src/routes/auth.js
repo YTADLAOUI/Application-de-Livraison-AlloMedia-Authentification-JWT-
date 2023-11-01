@@ -1,5 +1,4 @@
 const express=require("express");
-
 const Auth = require("../controllers/AuthController");
 const UserMiddle = require("../middlewares/alreadyLogged");
 const Rout= express.Router();
@@ -10,4 +9,4 @@ Rout.get("/verify/:token",Auth.emailVerfied);
 Rout.post("/login",UserMiddle.previouslyLogged,Auth.login)
 Rout.post("/forgetPassword",UserMiddle.previouslyLogged,Auth.forgetPassword);
 Rout.post("/resetPassword/:token",Auth.restPassword);
-module.exports={Rout};
+module.exports={Rout};  

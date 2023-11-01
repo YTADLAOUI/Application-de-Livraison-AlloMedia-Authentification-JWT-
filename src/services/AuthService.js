@@ -8,13 +8,12 @@ class AuthService{
     const existUser= await userModel.findOne({email});
     return existUser ? true : false;
   }
-   static updateOne = async (model,documentId,fileds) =>{ 
-    console.log(fileds);
-      return await  model.updateOne(documentId,fileds);
+   static updateOne = async (model,filter,fields) =>{ 
+          return await model.updateOne(filter, fields);
    }
     static findOne =async (model,argg,populate=false)=>{
       const queryFind= await model.findOne(argg)
-        if(populate)  return queryFind.populate(populate);
+        if(queryFind && populate)  return queryFind.populate(populate);
         return queryFind;
     }
 
@@ -23,14 +22,14 @@ class AuthService{
     return await bcrypt.hash(password, saltRounds);
   }
 
-  static createUser = async (name,email,passwordHashed,phoneNumber,address,image,role,roleID) => {
+  static createUser = async (name,email,passwordHashed,phoneNumber,address,role,roleID) => {
     return new userModel({
       name,
       email,
       password: passwordHashed,
       phoneNumber,
       address,
-      image,
+      image: "photo.png",
       role:roleID._id,
       isEmailVerfied:false,
       isVerified: role === 'Livreur' ? false : true, 
